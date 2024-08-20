@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Random Number Generator</title>
+<style>
+  body {
+    display: flex; /* Use flexbox for centering */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    min-height: 100vh; /* Set minimum height for viewport coverage */
+    background-color: #f0f0f0; /* Light gray background */
+  }
+
+  #container {
+    background-color: #fff; /* White container background */
+    border: 1px solid #ddd; /* Light gray border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 20px;
+    text-align: center; /* Center text within container */
+  }
+
+  label {
+    display: block; /* Make labels display on separate lines */
+    margin-bottom: 5px; /* Add some space between labels and inputs */
+  }
+
+  #result {
+    color: green; /* Green color for successful results */
+    margin-top: 10px; /* Add space above the result */
+  }
+
+  #result.error {
+    color: red; /* Red color for errors */
+  }
+
+  button {
+    background-color: #4CAF50; /* Green button color */
+    color: white; /* White button text */
+    padding: 10px 20px; /* Button padding */
+    border: none; /* Remove button border */
+    border-radius: 5px; /* Rounded corners for button */
+    cursor: pointer; /* Change cursor to pointer on hover */
+  }
+
+  button:hover {
+    background-color: #3e8e41; /* Darker green on hover */
+  }
+</style>
+</head>
+<body>
+  <div id="container">
+    <label for="min">Minimum Value:</label>
+    <input type="number" id="min">
+    <br>
+    <label for="max">Maximum Value:</label>
+    <input type="number" id="max">
+    <br>
+    <button onclick="generateRandomNumber()">Generate</button>
+    <p id="result"></p>
+  </div>
+
+  <script>
+    function generateRandomNumber() {
+      const minInput = document.getElementById('min');
+      const maxInput = document.getElementById('max');
+      const result = document.getElementById('result');
+
+      const min = parseInt(minInput.value);
+      const max = parseInt(maxInput.value);
+
+      if (isNaN(min) || isNaN(max)) {
+        result.textContent = "Please enter valid numbers";
+        result.classList.add('error'); /* Add error class for red color */
+        return;
+      }
+
+      if (min >= max) {
+        result.textContent = "Minimum value must be less than maximum value";
+        result.classList.add('error');
+        return;
+      }
+
+      const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+      result.textContent = "Random Number: " + randomNumber;
+      result.classList.remove('error'); /* Remove error class for green color */
+    }
+  </script>
+</body>
+</html>
